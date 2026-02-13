@@ -1,0 +1,90 @@
+{
+  "prayerTimes": {
+    "fajr": "05:30",
+    "zuhr": "12:30",
+    "asr": "16:15",
+    "maghrib": "18:05",
+    "isha": "19:30",
+    "jummah": "12:15"
+  },
+  "donations": [],
+  "events": [
+    {
+      "id": 1,
+      "title": "Weekly Tafseer Class",
+      "category": "Educational",
+      "date": "2026-02-15",
+      "time": "After Maghrib",
+      "location": "Main Hall",
+      "seats": 100,
+      "registered": 45,
+      "description": "Detailed explanation of Surah Al-Baqarah"
+    },
+    {
+      "id": 2,
+      "title": "Youth Islamic Camp",
+      "category": "Youth",
+      "date": "2026-02-20",
+      "time": "9:00 AM",
+      "location": "Community Center",
+      "seats": 150,
+      "registered": 89,
+      "description": "Learning and activities for ages 12-18"
+    }
+  ],
+  "users": [],
+  "books": [
+    {
+      "id": 1,
+      "title": "The Holy Quran",
+      "author": "Allah (SWT)",
+      "category": "quran",
+      "format": "PDF",
+      "url": "https://archive.org/download/holy-quran-beautiful-arabic-text/holy-quran-beautiful-arabic-text.pdf",
+      "downloads": 15234
+    },
+    {
+      "id": 2,
+      "title": "Sahih al-Bukhari",
+      "author": "Imam Bukhari",
+      "category": "hadith",
+      "format": "PDF",
+      "url": "https://archive.org/download/SahihBukhariVol.1-8ArabicEnglish/Sahih%20Bukhari%20Vol.%201-8%20Arabic-English.pdf",
+      "downloads": 8934
+    }
+  ],
+  "hadiths": [
+    {
+      "id": 1,
+      "arabic": "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ",
+      "text": "Actions are judged by intentions.",
+      "source": "Sahih al-Bukhari 1",
+      "schedule": "fajr"
+    }
+  ],
+  "campaigns": [
+    {
+      "id": 1,
+      "name": "Masjid Expansion",
+      "raised": 1500000,
+      "goal": 2000000
+    },
+    {
+      "id": 2,
+      "name": "Ramadan Iftar",
+      "raised": 45000,
+      "goal": 100000
+    },
+    {
+      "id": 3,
+      "name": "Madrasa Building",
+      "raised": 750000,
+      "goal": 1500000
+    }
+  ],
+  "isLive": false,
+  "youtubeUrl": "",
+  "razorpayKeyId": "rzp_test_xxxxxxxxxxxx",
+  "razorpayKeySecret": "",
+  "visitorCount": 1018
+}
