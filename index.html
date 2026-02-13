@@ -1595,43 +1595,38 @@
     </div>
 
     <script>
-        // ==================== REAL-TIME SYNC WITH BROADCAST CHANNEL ====================
-        const bc = new BroadcastChannel('aqsha_masjid_sync');
-        
-        // Default data with Razorpay test keys
-        let appData = {
+      // ==================== REAL-TIME SYNC WITH BROADCAST CHANNEL ====================
+const bc = new BroadcastChannel('aqsha_masjid_sync');
+
+// Load data from data.json file
+let appData = {};
+
+async function loadDataFromFile() {
+    try {
+        const response = await fetch('data.json');
+        if (!response.ok) throw new Error('Failed to load data.json');
+        appData = await response.json();
+        console.log('Data loaded from data.json');
+        updateAllDisplays();
+    } catch (error) {
+        console.error('Error loading data.json:', error);
+        // Fallback default data
+        appData = {
             prayerTimes: { fajr: '05:30', zuhr: '12:30', asr: '16:15', maghrib: '18:05', isha: '19:30', jummah: '12:15' },
             donations: [],
-            events: [
-                { id: 1, title: 'Weekly Tafseer Class', category: 'Educational', date: '2026-02-15', time: 'After Maghrib', location: 'Main Hall', seats: 100, registered: 45, description: 'Detailed explanation of Surah Al-Baqarah' },
-                { id: 2, title: 'Youth Islamic Camp', category: 'Youth', date: '2026-02-20', time: '9:00 AM', location: 'Community Center', seats: 150, registered: 89, description: 'Learning and activities for ages 12-18' }
-            ],
+            events: [],
             users: [],
-            books: [
-                { id: 1, title: 'The Holy Quran', author: 'Allah (SWT)', category: 'quran', format: 'PDF', url: 'https://archive.org/download/holy-quran-beautiful-arabic-text/holy-quran-beautiful-arabic-text.pdf', downloads: 15234 },
-                { id: 2, title: 'Sahih al-Bukhari', author: 'Imam Bukhari', category: 'hadith', format: 'PDF', url: 'https://archive.org/download/SahihBukhariVol.1-8ArabicEnglish/Sahih%20Bukhari%20Vol.%201-8%20Arabic-English.pdf', downloads: 8934 },
-                { id: 3, title: 'Riyad us-Saliheen', author: 'Imam Nawawi', category: 'hadith', format: 'PDF', url: 'https://archive.org/download/RiyadUsSaliheenEnglishTranslation/riyad-us-saliheen.pdf', downloads: 7654 },
-                { id: 4, title: 'Fiqh-us-Sunnah', author: 'Sayyid Sabiq', category: 'fiqh', format: 'PDF', url: 'https://archive.org/download/FiqhUsSunnah/Fiqh%20Us-Sunnah.pdf', downloads: 6234 }
-            ],
-            hadiths: [
-                { id: 1, arabic: 'إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ', text: 'Actions are judged by intentions.', source: 'Sahih al-Bukhari 1', schedule: 'fajr' },
-                { id: 2, arabic: 'مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ', text: 'When Allah wishes good for someone, He bestows upon him the understanding of Deen.', source: 'Sahih al-Bukhari 71', schedule: 'zuhr' },
-                { id: 3, arabic: 'الدُّنْيَا سِجْنُ الْمُؤْمِنِ', text: 'The world is a prison for the believer.', source: 'Sahih Muslim 2956', schedule: 'asr' },
-                { id: 4, arabic: 'مَنْ كَانَ يُؤْمِنُ بِاللَّهِ فَلْيَقُلْ خَيْرًا', text: 'Whoever believes in Allah, let him speak good or remain silent.', source: 'Sahih al-Bukhari 6018', schedule: 'maghrib' },
-                { id: 5, arabic: 'تَبَسُّمُكَ فِي وَجْهِ أَخِيكَ صَدَقَةٌ', text: 'Your smile for your brother is a charity.', source: 'Jami at-Tirmidhi 1956', schedule: 'isha' }
-            ],
-            campaigns: [
-                { id: 1, name: 'Masjid Expansion', raised: 1500000, goal: 2000000 },
-                { id: 2, name: 'Ramadan Iftar', raised: 45000, goal: 100000 },
-                { id: 3, name: 'Madrasa Building', raised: 750000, goal: 1500000 }
-            ],
+            books: [],
+            hadiths: [],
+            campaigns: [],
             isLive: false,
             youtubeUrl: '',
             razorpayKeyId: 'rzp_test_xxxxxxxxxxxx',
             razorpayKeySecret: '',
-            currentHadithIndex: 0,
-            visitorCount: 1018
+            visitorCount: 0
         };
+    }
+}
 
         let currentUser = null;
         let currentAdmin = false;
