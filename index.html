@@ -1628,13 +1628,48 @@ async function loadDataFromFile() {
             razorpayKeySecret: '',
             visitorCount: 0
         };
+        }
+    }
+
+// ==================== FIREBASE INITIALIZATION ====================
+const firebaseConfig = {
+    apiKey: "AIzaSyC-WvOhauJ0uWuqQduULSZIOs3zRiDltfs",
+    authDomain: "shahreyarchat.firebaseapp.com",
+    databaseURL: "https://shahreyarchat-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "shahreyarchat",
+    storageBucket: "shahreyarchat.firebasestorage.app",
+    messagingSenderId: "535731252720",
+    appId: "1:535731252720:web:0ff0d5cfc2b8b98cc5c135"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+// Load data from Firebase Realtime Database
+async function loadDataFromFirebase() {
+    try {
+        const snapshot = await database.ref('/').once('value');
+        const firebaseData = snapshot.val();
+        
+        if (firebaseData) {
+            appData = firebaseData;
+            console.log('Data loaded from Firebase');
+        } else {
+            // If no data in Firebase, load from file and save to Firebase
+            await loadDataFromFile();
+            await database.ref('/').set(appData);
+            console.log('Data saved to Firebase');
+        }
+    } catch (error) {
+        console.error('Firebase error:', error);
+        // Fallback to file
+        await loadDataFromFile();
     }
 }
 
         let currentUser = null;
         let currentAdmin = false;
-        let selectedCategory = null;
-        let selectedAmountValue = 0;
 
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', function() {
