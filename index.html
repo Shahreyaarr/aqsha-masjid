@@ -1,0 +1,2391 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Aqsha Masjid - रेवतिथ Konhi | Real-Time Islamic Center</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+    <style>
+        :root {
+            --primary-green: #1e5631;
+            --light-green: #2d7a46;
+            --gold: #d4af37;
+            --light-gold: #f4e4bc;
+            --white: #ffffff;
+            --cream: #f8f6f0;
+            --dark: #1a1a1a;
+            --text-dark: #2c3e50;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Mobile Scrollable Navbar - Slider Style */
+        @media (max-width: 768px) {
+            .nav-links { 
+                display: flex !important;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: row !important;
+                padding: 0.75rem 1rem;
+                gap: 0.5rem;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                z-index: 999;
+            }
+            .nav-links::-webkit-scrollbar { display: none; }
+            .nav-links li { display: inline-block; }
+            .nav-links a {
+                display: inline-block;
+                padding: 0.5rem 1rem;
+                background: var(--cream);
+                border-radius: 20px;
+                font-size: 0.85rem;
+                border: 1px solid transparent;
+            }
+            .nav-links a:active, .nav-links a:hover {
+                background: var(--primary-green);
+                color: white;
+            }
+            .mobile-menu { display: none !important; }
+            .hero { margin-top: 120px !important; }
+            .hero-content { 
+                grid-template-columns: 1fr !important; 
+                padding: 1.5rem !important;
+                gap: 2rem !important;
+            }
+            .hero-text h2 { font-size: 2rem !important; }
+            .hero-text .arabic-title { font-size: 1.75rem !important; }
+            .prayer-times-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .admin-main { margin-left: 0 !important; width: 100% !important; }
+            .admin-sidebar { 
+                transform: translateX(-100%); 
+                width: 280px !important;
+                transition: transform 0.3s ease;
+            }
+            .admin-sidebar.active { transform: translateX(0); }
+            .admin-mobile-toggle { display: flex !important; }
+            .donation-categories { grid-template-columns: repeat(2, 1fr) !important; }
+            .events-grid { grid-template-columns: 1fr !important; }
+            .book-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            section { padding: 3rem 1rem !important; }
+            .section-header h2 { font-size: 1.75rem !important; }
+            .footer-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text h1 { font-size: 1.1rem !important; }
+            .logo-icon { width: 38px !important; height: 38px !important; }
+            .nav-actions .btn span { display: none; }
+            .nav-actions .btn { padding: 0.5rem; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--cream); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon {
+            width: 45px; height: 45px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1.25rem;
+            border: 2px solid var(--gold);
+            flex-shrink: 0;
+        }
+        .logo-text h1 { font-size: 1.25rem; color: var(--primary-green); font-weight: 700; }
+        .logo-text p { font-size: 0.7rem; color: var(--gold); font-weight: 600; }
+
+        .nav-links { 
+            display: flex; 
+            gap: 1.5rem; 
+            list-style: none; 
+            align-items: center; 
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-links a:hover { color: var(--primary-green); }
+
+        .nav-actions { display: flex; gap: 0.5rem; align-items: center; }
+        .mobile-menu { display: none; }
+
+        .btn {
+            padding: 0.6rem 1.25rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .btn-primary { background: var(--primary-green); color: var(--white); border: 2px solid var(--primary-green); }
+        .btn-primary:hover { background: transparent; color: var(--primary-green); }
+        .btn-gold { background: var(--gold); color: var(--dark); border: 2px solid var(--gold); }
+        .btn-outline { background: transparent; color: var(--primary-green); border: 2px solid var(--primary-green); }
+        .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+            background: linear-gradient(135deg, rgba(30,86,49,0.95), rgba(30,86,49,0.9));
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+        .hero-text h2 { font-size: 3rem; color: var(--white); margin-bottom: 0.5rem; }
+        .hero-text .arabic-title {
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        .hero-text p { font-size: 1.1rem; color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; }
+        .hero-address {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(212,175,55,0.15);
+            padding: 0.6rem 1.25rem;
+            border-radius: 50px;
+            color: var(--light-gold);
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(212,175,55,0.3);
+            font-size: 0.9rem;
+        }
+        .hero-buttons { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+        /* Prayer Widget */
+        .prayer-widget {
+            background: rgba(255,255,255,0.98);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            border: 2px solid var(--gold);
+            max-width: 400px;
+            margin-left: auto;
+        }
+        .widget-header { text-align: center; margin-bottom: 1.5rem; }
+        .widget-header h3 { color: var(--primary-green); font-size: 1.25rem; }
+        .hijri-date { color: var(--gold); font-weight: 700; font-size: 1rem; }
+        .gregorian-date { color: #666; font-size: 0.85rem; margin-top: 0.25rem; }
+        
+        .countdown-box {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 1.25rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--gold);
+        }
+        .countdown-label { font-size: 0.8rem; letter-spacing: 1px; opacity: 0.9; }
+        .countdown-time { font-size: 2.25rem; font-weight: 700; color: var(--gold); font-family: monospace; }
+        .countdown-prayer { font-size: 0.85rem; margin-top: 0.25rem; opacity: 0.9; }
+        
+        .prayer-times-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .prayer-item {
+            text-align: center;
+            padding: 0.875rem 0.5rem;
+            background: var(--cream);
+            border-radius: 10px;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+        .prayer-item.active {
+            background: var(--primary-green);
+            color: var(--white);
+            border-color: var(--gold);
+            transform: scale(1.05);
+        }
+        .prayer-name { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .prayer-time { font-size: 1.1rem; color: var(--primary-green); font-weight: 700; }
+        .prayer-item.active .prayer-time { color: var(--white); }
+
+        .jummah-highlight {
+            background: linear-gradient(135deg, var(--gold), #b8941f);
+            color: var(--dark);
+            padding: 0.875rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 2rem 1rem;
+            background: var(--white);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .stats-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+        .stat-item { padding: 1rem; }
+        .stat-item i { font-size: 2rem; color: var(--gold); margin-bottom: 0.5rem; }
+        .stat-item h3 { color: var(--primary-green); font-size: 1.75rem; font-weight: 700; }
+        .stat-item p { color: #666; font-size: 0.85rem; }
+
+        /* Sections */
+        section { padding: 4rem 1.5rem; max-width: 1400px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2rem; color: var(--primary-green); position: relative; display: inline-block; }
+        .section-header h2::after {
+            content: ''; position: absolute;
+            bottom: -10px; left: 50%;
+            transform: translateX(-50%);
+            width: 60px; height: 4px;
+            background: var(--gold); border-radius: 2px;
+        }
+
+        /* Donation */
+        .donation-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin: 2rem auto;
+        }
+        .campaign-card {
+            background: var(--cream);
+            padding: 1.25rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+        .campaign-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            align-items: center;
+        }
+        .progress-bar {
+            background: #e0e0e0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary-green), var(--light-green));
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        .donation-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .donation-card {
+            background: var(--cream);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .donation-card.selected {
+            border-color: var(--gold);
+            background: var(--primary-green);
+            color: var(--white);
+        }
+        .donation-icon { font-size: 2rem; color: var(--gold); margin-bottom: 0.75rem; }
+
+        /* Events */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .event-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .event-card:hover { transform: translateY(-5px); }
+        .event-image {
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            position: relative;
+        }
+        .event-date {
+            position: absolute;
+            top: 1rem; left: 1rem;
+            background: var(--gold);
+            color: var(--dark);
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        /* Live Stream */
+        .live-stream-container {
+            background: var(--dark);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--gold);
+        }
+        .live-badge {
+            position: absolute;
+            top: 1rem; left: 1rem;
+            background: #ff4444;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 10;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+        /* Education */
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .book-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .book-cover {
+            height: 240px;
+            background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            position: relative;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        /* Admin Panel - Fixed */
+        .admin-panel, .user-panel {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #f0f2f5;
+            z-index: 9999;
+            overflow: hidden;
+        }
+        .admin-panel.active, .user-panel.active { display: flex; }
+        
+        .admin-sidebar {
+            position: fixed;
+            left: 0; top: 0; bottom: 0;
+            width: 280px;
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 1.5rem;
+            overflow-y: auto;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+        .admin-logo { text-align: center; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 1.5rem; }
+        .admin-nav { list-style: none; flex: 1; }
+        .admin-nav li { margin-bottom: 0.25rem; }
+        .admin-nav a {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .admin-nav a:hover, .admin-nav a.active { background: rgba(255,255,255,0.1); color: var(--gold); }
+        
+        .admin-main {
+            margin-left: 280px;
+            padding: 1.5rem;
+            flex: 1;
+            overflow-y: auto;
+            height: 100vh;
+            width: calc(100% - 280px);
+        }
+        
+        .admin-header {
+            background: var(--white);
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .stat-card {
+            background: var(--white);
+            padding: 1.25rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .admin-section {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            display: none;
+        }
+        .admin-section.active { display: block; }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: #ccc;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .toggle-switch.active { background: var(--primary-green); }
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 22px; height: 22px;
+            background: white;
+            border-radius: 50%;
+            top: 2px; left: 2px;
+            transition: 0.3s;
+        }
+        .toggle-switch.active::after { transform: translateX(24px); }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
+        .data-table th, .data-table td {
+            padding: 0.875rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .data-table th { background: var(--cream); color: var(--primary-green); font-weight: 600; }
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .status-active { background: #d4edda; color: #155724; }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            max-width: 450px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        /* User Panel */
+        .user-dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .user-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+        }
+
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            top: 90px;
+            right: 1rem;
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .toast {
+            background: var(--white);
+            padding: 1rem 1.25rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            animation: slideIn 0.3s ease;
+            border-left: 4px solid var(--gold);
+        }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        /* Footer - Exactly like image */
+        footer {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+        }
+        .footer-section h3 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+        .footer-section a:hover { color: var(--gold); }
+        .footer-quote {
+            font-style: italic;
+            color: var(--light-gold);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: var(--transition);
+        }
+        .social-links a:hover { background: var(--gold); color: var(--dark); }
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+        }
+        .newsletter-form button {
+            width: 44px;
+            height: 44px;
+            background: var(--gold);
+            border: none;
+            border-radius: 8px;
+            color: var(--dark);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+        .footer-bottom a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        .footer-bottom a:hover { color: var(--gold); }
+
+        /* Admin Mobile Toggle */
+        .admin-mobile-toggle {
+            display: none;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            background: var(--gold);
+            color: var(--dark);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 101;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Form Elements */
+        .form-group { margin-bottom: 1rem; }
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        .form-control:focus { outline: none; border-color: var(--gold); }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+        }
+        .quick-action-btn {
+            padding: 1rem;
+            background: var(--cream);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .quick-action-btn:hover { border-color: var(--gold); background: var(--white); }
+        .quick-action-btn i { font-size: 1.5rem; color: var(--primary-green); margin-bottom: 0.5rem; display: block; }
+
+        /* Sidebar Overlay */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 99;
+        }
+        .sidebar-overlay.active { display: block; }
+
+        /* Loader */
+        .loader {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--primary-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.5s;
+        }
+        .loader.hidden { opacity: 0; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div style="text-align: center; color: var(--gold);">
+            <i class="fas fa-mosque" style="font-size: 3rem; animation: spin 2s linear infinite;"></i>
+            <p style="margin-top: 1rem; font-size: 1.25rem;">Aqsha Masjid</p>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showSection('home')">
+                <div class="logo-icon"><i class="fas fa-mosque"></i></div>
+                <div class="logo-text">
+                    <h1>Aqsha Masjid</h1>
+                    <p>रेवतिथ Konhi, Bihar</p>
+                </div>
+            </a>
+
+            <!-- Horizontal Scrollable Nav for Mobile -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="showSection('home')">Home</a></li>
+                <li><a href="#prayer" onclick="showSection('prayer')">Prayer Times</a></li>
+                <li><a href="#donate" onclick="showSection('donate')">Donate</a></li>
+                <li><a href="#events" onclick="showSection('events')">Events</a></li>
+                <li><a href="#live" onclick="showSection('live')">Live</a></li>
+                <li><a href="#education" onclick="showSection('education')">Education</a></li>
+                <li><a href="#gallery" onclick="showSection('gallery')">Gallery</a></li>
+                <li><a href="#about" onclick="showSection('about')">About</a></li>
+                <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="btn btn-outline btn-sm" onclick="openUserLoginModal()" id="userLoginBtn">
+                    <i class="fas fa-user"></i> <span>Login</span>
+                </button>
+                <button class="btn btn-outline btn-sm" onclick="openUserPanel()" id="userPanelBtn" style="display: none;">
+                    <i class="fas fa-user-circle"></i> <span>Account</span>
+                </button>
+                <button class="btn btn-primary btn-sm" onclick="openAdminLoginModal()">
+                    <i class="fas fa-user-lock"></i> <span>Admin</span>
+                </button>
+                <button class="btn btn-gold btn-sm" onclick="showSection('donate')">
+                    <i class="fas fa-heart"></i> <span>Donate</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="mainContent">
+        
+        <!-- Hero Section -->
+        <section class="hero" id="home" style="padding: 0;">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="arabic-title">مسجد الأقصى</div>
+                    <h2>Aqsha Masjid</h2>
+                    <p>A place of peace, prayer, and community service. Join us in worship and help us serve humanity through the blessings of Allah.</p>
+                    
+                    <div class="hero-address">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>रेवतिथ Konhi - हकाम रोड, Rewathith, Bihar 841409</span>
+                    </div>
+
+                    <div class="hero-buttons">
+                        <button class="btn btn-gold" onclick="showSection('prayer')">
+                            <i class="fas fa-clock"></i> View Prayer Times
+                        </button>
+                        <button class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.5);" onclick="showSection('donate')">
+                            <i class="fas fa-hand-holding-heart"></i> Make a Donation
+                        </button>
+                        <button class="btn" style="background: rgba(255,255,255,0.15); color: white; border: 2px solid rgba(255,255,255,0.3);" onclick="showSection('live')">
+                            <i class="fas fa-video"></i> Watch Live
+                        </button>
+                    </div>
+                </div>
+
+                <div class="prayer-widget">
+                    <div class="widget-header">
+                        <h3>Today's Prayer Times</h3>
+                        <div class="hijri-date" id="hijriDate">25 Sha'ban 1447 AH</div>
+                        <div class="gregorian-date" id="gregorianDate">Friday, February 13, 2026</div>
+                    </div>
+
+                    <div class="countdown-box">
+                        <div class="countdown-label">NEXT PRAYER</div>
+                        <div class="countdown-time" id="countdown">00:00:00</div>
+                        <div class="countdown-prayer" id="nextPrayerName">Loading...</div>
+                    </div>
+
+                    <div class="prayer-times-grid" id="prayerTimesGrid">
+                        <!-- Generated by JS -->
+                    </div>
+
+                    <div class="jummah-highlight">
+                        <i class="fas fa-users"></i> 
+                        Jummah Khutbah: <span id="jummahTimeDisplay">12:15 PM</span> | 
+                        Prayer: <span id="jummahPrayerDisplay">12:30 PM</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <i class="fas fa-users"></i>
+                    <h3 id="statWorshippers">2,500+</h3>
+                    <p>Daily Worshippers</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3 id="statDonations">₹0</h3>
+                    <p>Total Donations</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3 id="statEvents">2</h3>
+                    <p>Upcoming Events</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-eye"></i>
+                    <h3 id="statVisitors">0</h3>
+                    <p>Today's Visitors</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Hadith Section -->
+        <section id="dailyHadithSection">
+            <div class="section-header">
+                <h2>Daily Hadith</h2>
+                <p>Authentic sayings of Prophet Muhammad (PBUH)</p>
+            </div>
+            <div style="background: var(--white); border-radius: 16px; padding: 2.5rem 2rem; box-shadow: var(--shadow); text-align: center; max-width: 800px; margin: 0 auto;">
+                <div style="font-family: 'Amiri', serif; font-size: 1.5rem; color: var(--primary-green); margin-bottom: 1.25rem;" id="hadithArabic">إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ</div>
+                <div style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 0.75rem; font-style: italic;" id="hadithText">"Actions are judged by intentions."</div>
+                <div style="color: var(--gold); font-weight: 700;" id="hadithSource">- Sahih al-Bukhari 1</div>
+                <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+                    <button class="btn btn-outline btn-sm" onclick="shareHadith('whatsapp')"><i class="fab fa-whatsapp"></i> Share</button>
+                    <button class="btn btn-outline btn-sm" onclick="shareHadith('facebook')"><i class="fab fa-facebook"></i> Share</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prayer Times Section -->
+        <section id="prayer" style="display: none;">
+            <div class="section-header">
+                <h2>Prayer Times</h2>
+                <p>Accurate prayer timings for Rewathith, Bihar</p>
+            </div>
+            <div style="background: var(--white); border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                    <h3 style="color: var(--primary-green);">Monthly Schedule</h3>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn btn-outline btn-sm" onclick="downloadSchedule()"><i class="fas fa-download"></i> PDF</button>
+                        <button class="btn btn-primary btn-sm" onclick="printSchedule()"><i class="fas fa-print"></i> Print</button>
+                    </div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="data-table" id="prayerTable">
+                        <thead>
+                            <tr><th>Date</th><th>Fajr</th><th>Sunrise</th><th>Zuhr</th><th>Asr</th><th>Maghrib</th><th>Isha</th></tr>
+                        </thead>
+                        <tbody id="prayerTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donation Section -->
+        <section id="donate" style="display: none;">
+            <div class="section-header">
+                <h2>Support Our Masjid</h2>
+                <p>Your generous donations help us maintain the masjid</p>
+            </div>
+
+            <!-- Campaigns -->
+            <div style="background: var(--white); border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow); margin-bottom: 1.5rem;">
+                <h3 style="color: var(--primary-green); margin-bottom: 1rem;"><i class="fas fa-bullseye"></i> Active Campaigns</h3>
+                <div id="campaignsContainer"></div>
+            </div>
+
+            <!-- Zakat Calculator -->
+            <div style="background: linear-gradient(135deg, var(--primary-green), var(--light-green)); color: var(--white); padding: 1.5rem; border-radius: 15px; margin-bottom: 1.5rem;">
+                <h3 style="margin-bottom: 1rem;"><i class="fas fa-calculator"></i> Zakat Calculator</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75rem;">
+                    <div class="form-group">
+                        <label>Gold Value (₹)</label>
+                        <input type="number" id="goldValue" class="form-control" placeholder="0" oninput="calculateZakat()" style="background: rgba(255,255,255,0.1); color: white; border-color: var(--gold);">
+                    </div>
+                    <div class="form-group">
+                        <label>Silver Value (₹)</label>
+                        <input type="number" id="silverValue" class="form-control" placeholder="0" oninput="calculateZakat()" style="background: rgba(255,255,255,0.1); color: white; border-color: var(--gold);">
+                    </div>
+                    <div class="form-group">
+                        <label>Cash & Bank (₹)</label>
+                        <input type="number" id="cashValue" class="form-control" placeholder="0" oninput="calculateZakat()" style="background: rgba(255,255,255,0.1); color: white; border-color: var(--gold);">
+                    </div>
+                    <div class="form-group">
+                        <label>Business Assets (₹)</label>
+                        <input type="number" id="businessValue" class="form-control" placeholder="0" oninput="calculateZakat()" style="background: rgba(255,255,255,0.1); color: white; border-color: var(--gold);">
+                    </div>
+                </div>
+                <div style="background: var(--gold); color: var(--dark); padding: 1.25rem; border-radius: 12px; text-align: center; margin-top: 1rem;">
+                    <div>Total Zakat Payable (2.5%)</div>
+                    <h3 id="zakatTotal" style="font-size: 1.75rem; margin-top: 0.5rem;">₹0</h3>
+                    <button class="btn btn-primary" onclick="donateZakat()" style="margin-top: 0.75rem; background: var(--dark); border-color: var(--dark);">
+                        <i class="fas fa-donate"></i> Pay Zakat Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="donation-section">
+                <h3 style="text-align: center; color: var(--primary-green); margin-bottom: 1.5rem;">Select Donation Category</h3>
+                <div class="donation-categories" id="donationCategories"></div>
+
+                <div style="margin: 1.5rem 0;">
+                    <h4 style="text-align: center; color: var(--primary-green); margin-bottom: 1rem;">Select Amount</h4>
+                    <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn btn-outline btn-sm" onclick="selectAmount(100)">₹100</button>
+                        <button class="btn btn-outline btn-sm" onclick="selectAmount(500)">₹500</button>
+                        <button class="btn btn-outline btn-sm" onclick="selectAmount(1000)">₹1,000</button>
+                        <button class="btn btn-outline btn-sm" onclick="selectAmount(2500)">₹2,500</button>
+                        <button class="btn btn-outline btn-sm" onclick="selectAmount(5000)">₹5,000</button>
+                    </div>
+                    <div style="display: flex; gap: 0.75rem; justify-content: center; margin-top: 1rem; align-items: center;">
+                        <span style="font-weight: 600; color: var(--primary-green);">Custom:</span>
+                        <input type="number" id="customAmount" placeholder="Enter amount" style="padding: 0.6rem; border: 2px solid #ddd; border-radius: 8px; width: 150px;" oninput="updateTotal()">
+                    </div>
+                </div>
+
+                <div style="background: var(--cream); padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0;">
+                    <h4 style="color: var(--primary-green); margin-bottom: 1rem;">Donor Information</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" id="donorName" class="form-control" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone *</label>
+                            <input type="tel" id="donorPhone" class="form-control" placeholder="Enter phone number">
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="donorEmail" class="form-control" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label>PAN (for 80G)</label>
+                            <input type="text" id="donorPAN" class="form-control" placeholder="ABCDE1234F">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: var(--cream); padding: 1.25rem; border-radius: 12px; margin: 1.5rem 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                        <span>Subtotal:</span>
+                        <span id="subtotal" style="font-weight: 700;">₹0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding-top: 0.75rem; border-top: 2px solid var(--gold); font-size: 1.1rem; font-weight: 700; color: var(--primary-green);">
+                        <span>Total:</span>
+                        <span id="totalAmount">₹0</span>
+                    </div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button class="btn btn-primary" style="padding: 0.875rem 2.5rem;" onclick="processDonation()">
+                        <i class="fas fa-lock"></i> Proceed to Pay Securely
+                    </button>
+                    <p style="margin-top: 0.75rem; color: #666; font-size: 0.8rem;">
+                        <i class="fas fa-shield-alt"></i> 100% Secure • Tax receipt will be emailed
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events" style="display: none;">
+            <div class="section-header">
+                <h2>Upcoming Events</h2>
+                <p>Join us in our religious, educational, and community programs</p>
+            </div>
+            <div class="events-grid" id="eventsGrid"></div>
+        </section>
+
+        <!-- Live Stream Section -->
+        <section id="live" style="display: none;">
+            <div class="section-header">
+                <h2>Live Streaming</h2>
+                <p>Watch Jummah Khutbah and special events live</p>
+            </div>
+            <div class="live-stream-container" id="liveContainer">
+                <div class="live-badge" id="liveBadge" style="display: none;">
+                    <i class="fas fa-circle" style="font-size: 0.5rem;"></i> LIVE
+                </div>
+                <div class="viewer-count" id="viewerCount" style="display: none;">
+                    <i class="fas fa-eye"></i> <span id="viewerNumber">0</span>
+                </div>
+                <div id="streamPlaceholder" style="text-align: center; color: var(--white); padding: 2rem;">
+                    <i class="fas fa-mosque" style="font-size: 4rem; color: var(--gold); margin-bottom: 1.5rem;"></i>
+                    <h3>No Live Stream Currently</h3>
+                    <p style="opacity: 0.8;">Check back during prayer times</p>
+                </div>
+                <div id="youtubePlayer" style="width: 100%; height: 100%; display: none;"></div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" style="display: none;">
+            <div class="section-header">
+                <h2>Islamic Education Center</h2>
+                <p>Access authentic Islamic books and resources</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                <button class="btn btn-primary btn-sm" onclick="switchEduTab('pdf')">PDF Library</button>
+                <button class="btn btn-outline btn-sm" onclick="switchEduTab('audio')">Audio</button>
+                <button class="btn btn-outline btn-sm" onclick="switchEduTab('quran')">Quran</button>
+            </div>
+            <div id="eduPdf" class="edu-content">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="bookSearch" placeholder="Search books..." oninput="searchBooks()">
+                </div>
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                    <button class="btn btn-primary btn-sm" onclick="filterBooks('all')">All</button>
+                    <button class="btn btn-outline btn-sm" onclick="filterBooks('quran')">Quran</button>
+                    <button class="btn btn-outline btn-sm" onclick="filterBooks('hadith')">Hadith</button>
+                    <button class="btn btn-outline btn-sm" onclick="filterBooks('fiqh')">Fiqh</button>
+                </div>
+                <div class="book-grid" id="bookGrid"></div>
+            </div>
+            <div id="eduAudio" class="edu-content" style="display: none;">
+                <div style="text-align: center; padding: 3rem;"><p>Audio lectures coming soon</p></div>
+            </div>
+            <div id="eduQuran" class="edu-content" style="display: none;">
+                <div style="text-align: center; padding: 3rem;">
+                    <button class="btn btn-primary" onclick="window.open('https://archive.org/download/holy-quran-beautiful-arabic-text/holy-quran-beautiful-arabic-text.pdf', '_blank')">
+                        <i class="fas fa-book"></i> Read Quran
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" style="display: none;">
+            <div class="section-header">
+                <h2>Gallery</h2>
+                <p>Moments from our events and activities</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                <button class="btn btn-primary btn-sm" onclick="filterGallery('all')">All</button>
+                <button class="btn btn-outline btn-sm" onclick="filterGallery('eid')">Eid</button>
+                <button class="btn btn-outline btn-sm" onclick="filterGallery('jummah')">Jummah</button>
+            </div>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" style="display: none;">
+            <div class="section-header">
+                <h2>About Aqsha Masjid</h2>
+                <p>Our history, mission, and community</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; align-items: center;">
+                <div style="background: linear-gradient(135deg, var(--primary-green), var(--light-green)); height: 300px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 5rem;">
+                    <i class="fas fa-mosque"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--primary-green); font-size: 1.5rem; margin-bottom: 1rem;">Our History</h3>
+                    <p style="color: #555; line-height: 1.7; margin-bottom: 1rem;">Established in 1985, Aqsha Masjid has been serving the Muslim community of Rewathith for nearly four decades.</p>
+                    <p style="color: #555; line-height: 1.7;">Today we serve over 2,500 worshippers daily with facilities including a madrasa, library, and community hall.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" style="display: none;">
+            <div class="section-header">
+                <h2>Contact Us</h2>
+                <p>Get in touch with us</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+                <div>
+                    <div style="background: var(--white); padding: 1.25rem; border-radius: 12px; margin-bottom: 1rem; border-left: 4px solid var(--gold);">
+                        <h4 style="color: var(--primary-green);"><i class="fas fa-map-marker-alt"></i> Address</h4>
+                        <p style="color: #666; margin-top: 0.5rem;">रेवतिथ Konhi - हकाम रोड<br>Rewathith, Bihar 841409</p>
+                    </div>
+                    <div style="background: var(--white); padding: 1.25rem; border-radius: 12px; border-left: 4px solid var(--gold);">
+                        <h4 style="color: var(--primary-green);"><i class="fas fa-phone"></i> Phone</h4>
+                        <p style="color: #666; margin-top: 0.5rem;">+91 98765 43210</p>
+                    </div>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 16px; box-shadow: var(--shadow);">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1rem;">Send Message</h3>
+                    <form onsubmit="submitContactForm(event)">
+                        <div class="form-group"><input type="text" class="form-control" placeholder="Your Name" required></div>
+                        <div class="form-group"><input type="email" class="form-control" placeholder="Email" required></div>
+                        <div class="form-group"><textarea class="form-control" rows="4" placeholder="Message" required></textarea></div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fas fa-paper-plane"></i> Send</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer - Exactly Like Image -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>Aqsha Masjid</h3>
+                <p>A place of worship, learning, and community service dedicated to serving the Muslim ummah.</p>
+                <p class="footer-quote">"Indeed, the mosques of Allah are maintained only by those who believe in Allah and the Last Day..."</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com/shahreyarr._" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/Shahreyaarr" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#" onclick="showSection('home')">Home</a></p>
+                <p><a href="#" onclick="showSection('prayer')">Prayer Times</a></p>
+                <p><a href="#" onclick="showSection('donate')">Donate</a></p>
+                <p><a href="#" onclick="showSection('events')">Events</a></p>
+                <p><a href="#" onclick="showSection('about')">About Us</a></p>
+                <p><a href="#" onclick="showSection('contact')">Contact</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <p><a href="#">Nikah Services</a></p>
+                <p><a href="#">Islamic Education</a></p>
+                <p><a href="#">Zakat Collection</a></p>
+                <p><a href="#">Funeral Services</a></p>
+                <p><a href="#">Counseling</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe for updates on prayer times and events.</p>
+                <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aqsha Masjid. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--gold);"></i> for the sake of Allah</p>
+            <p style="margin-top: 0.5rem;">Developed by <a href="#">Shahreyar</a> | GitHub: <a href="https://github.com/Shahreyaarr" target="_blank">Shahreyaarr</a> | Instagram: <a href="https://instagram.com/shahreyarr._" target="_blank">shahreyarr._</a></p>
+        </div>
+    </footer>
+
+    <!-- Login Modals -->
+    <div class="modal" id="adminLoginModal">
+        <div class="modal-content" style="position: relative;">
+            <button class="modal-close" onclick="closeModal('adminLoginModal')"><i class="fas fa-times"></i></button>
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <div style="width: 70px; height: 70px; background: var(--primary-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--gold); font-size: 1.75rem;">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h2 style="font-size: 1.5rem;">Admin Login</h2>
+            </div>
+            <form onsubmit="handleAdminLogin(event)">
+                <div class="form-group"><input type="text" id="adminUsername" class="form-control" placeholder="Username" required></div>
+                <div class="form-group"><input type="password" id="adminPassword" class="form-control" placeholder="Password" required></div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login to Dashboard</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; color: #666; font-size: 0.85rem;">Demo: admin / admin123</p>
+        </div>
+    </div>
+
+    <div class="modal" id="userLoginModal">
+        <div class="modal-content" style="position: relative;">
+            <button class="modal-close" onclick="closeModal('userLoginModal')"><i class="fas fa-times"></i></button>
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <div style="width: 70px; height: 70px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--dark); font-size: 1.75rem;">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h2 style="font-size: 1.5rem;">User Login</h2>
+            </div>
+            <form onsubmit="handleUserLogin(event)">
+                <div class="form-group"><input type="email" id="loginEmail" class="form-control" placeholder="Email" required></div>
+                <div class="form-group"><input type="password" id="loginPassword" class="form-control" placeholder="Password" required></div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                <p style="text-align: center; margin-top: 1rem; color: #666; font-size: 0.9rem;">Don't have account? <a href="#" style="color: var(--primary-green);">Register</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleAdminSidebar()"></div>
+        <button class="admin-mobile-toggle" onclick="toggleAdminSidebar()"><i class="fas fa-bars"></i></button>
+        
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="admin-logo">
+                <i class="fas fa-mosque" style="font-size: 2.5rem; color: var(--gold);"></i>
+                <h2>Admin Panel</h2>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.8rem;">Real-Time Management</p>
+            </div>
+            <nav>
+                <ul class="admin-nav">
+                    <li><a href="#" class="active" onclick="showAdminSection('adminDashboard', this)"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#" onclick="showAdminSection('adminPrayer', this)"><i class="fas fa-clock"></i> Prayer Times</a></li>
+                    <li><a href="#" onclick="showAdminSection('adminLive', this)"><i class="fas fa-video"></i> Live Stream</a></li>
+                    <li><a href="#" onclick="showAdminSection('adminDonations', this)"><i class="fas fa-hand-holding-usd"></i> Donations</a></li>
+                    <li><a href="#" onclick="showAdminSection('adminEvents', this)"><i class="fas fa-calendar-alt"></i> Events</a></li>
+                    <li><a href="#" onclick="showAdminSection('adminHadith', this)"><i class="fas fa-book-open"></i> Hadith</a></li>
+                    <li><a href="#" onclick="showAdminSection('adminEducation', this)"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                    <li><a href="#" onclick="showAdminSection('adminUsers', this)"><i class="fas fa-users"></i> Users</a></li>
+                    <li><a href="#" onclick="showAdminSection('adminSettings', this)"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li style="margin-top: auto;"><a href="#" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <!-- Dashboard -->
+            <div class="admin-section active" id="adminDashboard">
+                <div class="admin-header">
+                    <div>
+                        <h2 style="color: var(--primary-green);">Dashboard</h2>
+                        <p style="color: #666; font-size: 0.85rem; margin-top: 0.25rem;">Real-time updates active</p>
+                    </div>
+                    <span style="background: #d4edda; color: #155724; padding: 0.4rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">
+                        <i class="fas fa-circle" style="font-size: 0.5rem;"></i> Live
+                    </span>
+                </div>
+
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div>
+                            <h3 style="font-size: 1.5rem; color: var(--primary-green);" id="dashTotalUsers">0</h3>
+                            <p style="color: #666; font-size: 0.85rem;">Total Users</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                        <div>
+                            <h3 style="font-size: 1.5rem; color: var(--primary-green);" id="dashTodayDonations">₹0</h3>
+                            <p style="color: #666; font-size: 0.85rem;">Today's Donations</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                        <div>
+                            <h3 style="font-size: 1.5rem; color: var(--primary-green);" id="dashActiveEvents">0</h3>
+                            <p style="color: #666; font-size: 0.85rem;">Active Events</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-eye"></i></div>
+                        <div>
+                            <h3 style="font-size: 1.5rem; color: var(--primary-green);" id="dashLiveViewers">0</h3>
+                            <p style="color: #666; font-size: 0.85rem;">Live Viewers</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div class="admin-section active" style="display: block;">
+                        <h3 style="color: var(--primary-green); margin-bottom: 1rem;">Recent Activity</h3>
+                        <div id="activityLog" style="max-height: 250px; overflow-y: auto;"></div>
+                    </div>
+                    <div>
+                        <div class="admin-section active" style="display: block; margin-bottom: 1rem;">
+                            <h3 style="color: var(--primary-green); margin-bottom: 1rem;">Quick Actions</h3>
+                            <div class="quick-actions">
+                                <div class="quick-action-btn" onclick="showAdminSection('adminLive', null); toggleAdminSidebar();">
+                                    <i class="fas fa-video"></i><span>Go Live</span>
+                                </div>
+                                <div class="quick-action-btn" onclick="showAdminSection('adminEvents', null); toggleAdminSidebar();">
+                                    <i class="fas fa-plus"></i><span>Add Event</span>
+                                </div>
+                                <div class="quick-action-btn" onclick="broadcastMessage()">
+                                    <i class="fas fa-bullhorn"></i><span>Broadcast</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prayer Times Admin -->
+            <div class="admin-section" id="adminPrayer">
+                <div class="admin-header">
+                    <h2 style="color: var(--primary-green);">Prayer Times Management</h2>
+                    <button class="btn btn-primary btn-sm" onclick="fetchPrayerTimesAPI()"><i class="fas fa-sync"></i> Auto-Fetch</button>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 12px;">
+                    <h4 style="margin-bottom: 1rem;">Manual Override</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem;">
+                        <div class="form-group"><label>Fajr</label><input type="time" id="editFajr" class="form-control"></div>
+                        <div class="form-group"><label>Zuhr</label><input type="time" id="editZuhr" class="form-control"></div>
+                        <div class="form-group"><label>Asr</label><input type="time" id="editAsr" class="form-control"></div>
+                        <div class="form-group"><label>Maghrib</label><input type="time" id="editMaghrib" class="form-control"></div>
+                        <div class="form-group"><label>Isha</label><input type="time" id="editIsha" class="form-control"></div>
+                        <div class="form-group"><label>Jummah</label><input type="time" id="editJummah" class="form-control"></div>
+                    </div>
+                    <button class="btn btn-primary" style="margin-top: 1rem;" onclick="savePrayerTimesManual()"><i class="fas fa-save"></i> Update & Broadcast</button>
+                </div>
+            </div>
+
+            <!-- Live Stream Admin -->
+            <div class="admin-section" id="adminLive">
+                <div class="admin-header"><h2 style="color: var(--primary-green);">Live Stream Control</h2></div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 12px;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <span style="font-weight: 600;">Stream Status:</span>
+                        <div class="toggle-switch" id="liveToggle" onclick="toggleLiveStream()"></div>
+                        <span id="streamStatusText" style="color: #666; font-weight: 600;">OFF</span>
+                    </div>
+                    <div class="form-group">
+                        <label>YouTube Live URL</label>
+                        <input type="text" id="youtubeUrl" class="form-control" placeholder="https://www.youtube.com/embed/VIDEO_ID">
+                    </div>
+                    <button class="btn btn-primary" onclick="saveStreamSettings()"><i class="fas fa-save"></i> Save Settings</button>
+                </div>
+            </div>
+
+            <!-- Donations Admin -->
+            <div class="admin-section" id="adminDonations">
+                <div class="admin-header">
+                    <h2 style="color: var(--primary-green);">Donation Management</h2>
+                    <button class="btn btn-outline btn-sm" onclick="exportDonations()"><i class="fas fa-file-excel"></i> Export</button>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 12px; overflow-x: auto;">
+                    <table class="data-table">
+                        <thead><tr><th>ID</th><th>Name</th><th>Category</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead>
+                        <tbody id="donationsTableBody"><tr><td colspan="6" style="text-align: center; padding: 2rem;">No donations yet</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Events Admin -->
+            <div class="admin-section" id="adminEvents">
+                <div class="admin-header">
+                    <h2 style="color: var(--primary-green);">Event Management</h2>
+                    <button class="btn btn-primary btn-sm" onclick="openAddEventModal()"><i class="fas fa-plus"></i> Add Event</button>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 12px;" id="adminEventsList"></div>
+            </div>
+
+            <!-- Hadith Admin -->
+            <div class="admin-section" id="adminHadith">
+                <div class="admin-header"><h2 style="color: var(--primary-green);">Daily Hadith</h2></div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 12px;" id="hadithScheduleList"></div>
+            </div>
+
+            <!-- Education Admin -->
+            <div class="admin-section" id="adminEducation">
+                <div class="admin-header"><h2 style="color: var(--primary-green);">Education Content</h2></div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 12px;">
+                    <p>Manage PDF books here.</p>
+                    <button class="btn btn-primary btn-sm" style="margin-top: 1rem;"><i class="fas fa-plus"></i> Add New Book</button>
+                </div>
+            </div>
+
+            <!-- Users Admin -->
+            <div class="admin-section" id="adminUsers">
+                <div class="admin-header"><h2 style="color: var(--primary-green);">User Management</h2></div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 12px; overflow-x: auto;">
+                    <table class="data-table">
+                        <thead><tr><th>Name</th><th>Email</th><th>Joined</th><th>Actions</th></tr></thead>
+                        <tbody id="usersTableBody"><tr><td colspan="4" style="text-align: center; padding: 2rem;">No users registered yet</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Settings Admin - RAZORPAY KEYS -->
+            <div class="admin-section" id="adminSettings">
+                <div class="admin-header"><h2 style="color: var(--primary-green);">Settings</h2></div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 12px;">
+                    <h3 style="margin-bottom: 1rem; color: var(--primary-green);"><i class="fas fa-credit-card"></i> Payment Gateway (Razorpay)</h3>
+                    <div class="form-group">
+                        <label>Razorpay Key ID</label>
+                        <input type="text" id="razorpayKeyId" class="form-control" value="rzp_test_xxxxxxxxxxxx" placeholder="Enter Razorpay Key ID">
+                        <small style="color: #666; font-size: 0.8rem;">Get from Razorpay Dashboard → API Keys</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Razorpay Key Secret</label>
+                        <input type="password" id="razorpayKeySecret" class="form-control" placeholder="Enter Razorpay Key Secret">
+                        <small style="color: #666; font-size: 0.8rem;">Keep this secure. Never share publicly.</small>
+                    </div>
+                    <div style="background: var(--cream); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>Test Mode:</strong> Use test keys for development</p>
+                        <p style="font-size: 0.85rem; color: #666;">Test Card: 5267 3181 8797 5449 | Any future date | Any CVV</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="saveRazorpaySettings()"><i class="fas fa-save"></i> Save Payment Settings</button>
+                    
+                    <hr style="margin: 2rem 0; border: none; border-top: 1px solid #eee;">
+                    
+                    <h3 style="margin-bottom: 1rem; color: var(--primary-green);"><i class="fas fa-mosque"></i> Masjid Settings</h3>
+                    <div class="form-group">
+                        <label>Masjid Name</label>
+                        <input type="text" id="masjidName" class="form-control" value="Aqsha Masjid">
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Email</label>
+                        <input type="email" id="contactEmail" class="form-control" value="info@aqshamasjid.org">
+                    </div>
+                    <button class="btn btn-primary" onclick="saveGeneralSettings()"><i class="fas fa-save"></i> Save General Settings</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- User Panel -->
+    <div class="user-panel" id="userPanel">
+        <nav class="navbar" style="position: fixed;">
+            <div class="nav-container">
+                <a href="#" class="logo">
+                    <div class="logo-icon"><i class="fas fa-user-circle"></i></div>
+                    <div class="logo-text"><h1>My Account</h1><p>User Dashboard</p></div>
+                </a>
+                <div class="nav-actions">
+                    <button class="btn btn-outline btn-sm" onclick="closeUserPanel()"><i class="fas fa-arrow-left"></i> Back</button>
+                    <button class="btn btn-primary btn-sm" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <main style="margin-top: 70px; padding: 1.5rem; max-width: 1400px; margin-left: auto; margin-right: auto;">
+            <div class="admin-header">
+                <h2 style="color: var(--primary-green);">Welcome, <span id="userNameDisplay">User</span></h2>
+            </div>
+
+            <div class="user-dashboard-grid">
+                <div class="user-card">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1rem;"><i class="fas fa-donate"></i> My Donations</h3>
+                    <div style="text-align: center; padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; color: var(--gold); font-weight: 700;" id="userTotalDonations">₹0</div>
+                        <p style="color: #666; font-size: 0.9rem;">Total Contributed</p>
+                    </div>
+                    <button class="btn btn-outline btn-sm" style="width: 100%;" onclick="showSection('donate'); closeUserPanel();">Make New Donation</button>
+                </div>
+
+                <div class="user-card">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1rem;"><i class="fas fa-calendar"></i> My Events</h3>
+                    <div id="userEventsList" style="max-height: 150px; overflow-y: auto;"><p style="color: #666; text-align: center;">No events registered</p></div>
+                </div>
+
+                <div class="user-card">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1rem;"><i class="fas fa-user-edit"></i> Profile</h3>
+                    <form onsubmit="updateUserProfile(event)">
+                        <div class="form-group"><input type="text" id="userProfileName" class="form-control" placeholder="Name"></div>
+                        <div class="form-group"><input type="email" id="userProfileEmail" class="form-control" placeholder="Email" readonly style="background: #f5f5f5;"></div>
+                        <div class="form-group"><input type="tel" id="userProfilePhone" class="form-control" placeholder="Phone"></div>
+                        <button type="submit" class="btn btn-primary btn-sm" style="width: 100%;">Update Profile</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="user-card" style="margin-top: 1.5rem;">
+                <h3 style="color: var(--primary-green); margin-bottom: 1rem;">Donation History</h3>
+                <div style="overflow-x: auto;">
+                    <table class="data-table">
+                        <thead><tr><th>Date</th><th>Category</th><th>Amount</th></tr></thead>
+                        <tbody id="userDonationHistory"><tr><td colspan="3" style="text-align: center; color: #666;">No donations yet</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // ==================== REAL-TIME SYNC WITH BROADCAST CHANNEL ====================
+        const bc = new BroadcastChannel('aqsha_masjid_sync');
+        
+        // Default data with Razorpay test keys
+        let appData = {
+            prayerTimes: { fajr: '05:30', zuhr: '12:30', asr: '16:15', maghrib: '18:05', isha: '19:30', jummah: '12:15' },
+            donations: [],
+            events: [
+                { id: 1, title: 'Weekly Tafseer Class', category: 'Educational', date: '2026-02-15', time: 'After Maghrib', location: 'Main Hall', seats: 100, registered: 45, description: 'Detailed explanation of Surah Al-Baqarah' },
+                { id: 2, title: 'Youth Islamic Camp', category: 'Youth', date: '2026-02-20', time: '9:00 AM', location: 'Community Center', seats: 150, registered: 89, description: 'Learning and activities for ages 12-18' }
+            ],
+            users: [],
+            books: [
+                { id: 1, title: 'The Holy Quran', author: 'Allah (SWT)', category: 'quran', format: 'PDF', url: 'https://archive.org/download/holy-quran-beautiful-arabic-text/holy-quran-beautiful-arabic-text.pdf', downloads: 15234 },
+                { id: 2, title: 'Sahih al-Bukhari', author: 'Imam Bukhari', category: 'hadith', format: 'PDF', url: 'https://archive.org/download/SahihBukhariVol.1-8ArabicEnglish/Sahih%20Bukhari%20Vol.%201-8%20Arabic-English.pdf', downloads: 8934 },
+                { id: 3, title: 'Riyad us-Saliheen', author: 'Imam Nawawi', category: 'hadith', format: 'PDF', url: 'https://archive.org/download/RiyadUsSaliheenEnglishTranslation/riyad-us-saliheen.pdf', downloads: 7654 },
+                { id: 4, title: 'Fiqh-us-Sunnah', author: 'Sayyid Sabiq', category: 'fiqh', format: 'PDF', url: 'https://archive.org/download/FiqhUsSunnah/Fiqh%20Us-Sunnah.pdf', downloads: 6234 }
+            ],
+            hadiths: [
+                { id: 1, arabic: 'إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ', text: 'Actions are judged by intentions.', source: 'Sahih al-Bukhari 1', schedule: 'fajr' },
+                { id: 2, arabic: 'مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ', text: 'When Allah wishes good for someone, He bestows upon him the understanding of Deen.', source: 'Sahih al-Bukhari 71', schedule: 'zuhr' },
+                { id: 3, arabic: 'الدُّنْيَا سِجْنُ الْمُؤْمِنِ', text: 'The world is a prison for the believer.', source: 'Sahih Muslim 2956', schedule: 'asr' },
+                { id: 4, arabic: 'مَنْ كَانَ يُؤْمِنُ بِاللَّهِ فَلْيَقُلْ خَيْرًا', text: 'Whoever believes in Allah, let him speak good or remain silent.', source: 'Sahih al-Bukhari 6018', schedule: 'maghrib' },
+                { id: 5, arabic: 'تَبَسُّمُكَ فِي وَجْهِ أَخِيكَ صَدَقَةٌ', text: 'Your smile for your brother is a charity.', source: 'Jami at-Tirmidhi 1956', schedule: 'isha' }
+            ],
+            campaigns: [
+                { id: 1, name: 'Masjid Expansion', raised: 1500000, goal: 2000000 },
+                { id: 2, name: 'Ramadan Iftar', raised: 45000, goal: 100000 },
+                { id: 3, name: 'Madrasa Building', raised: 750000, goal: 1500000 }
+            ],
+            isLive: false,
+            youtubeUrl: '',
+            razorpayKeyId: 'rzp_test_xxxxxxxxxxxx',
+            razorpayKeySecret: '',
+            currentHadithIndex: 0,
+            visitorCount: 1018
+        };
+
+        let currentUser = null;
+        let currentAdmin = false;
+        let selectedCategory = null;
+        let selectedAmountValue = 0;
+
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load from localStorage
+            const saved = localStorage.getItem('aqsha_masjid_data');
+            if (saved) appData = { ...appData, ...JSON.parse(saved) };
+            
+            // Update visitor count
+            appData.visitorCount++;
+            saveData();
+            
+            // Hide loader
+            setTimeout(() => document.getElementById('loader').classList.add('hidden'), 800);
+
+            // Start countdown
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+            
+            // Check logged in user
+            const savedUser = localStorage.getItem('current_user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                updateUserUI();
+            }
+
+            // Initialize all sections
+            initPrayerTimes();
+            initEvents();
+            initBooks();
+            initGallery();
+            initCampaigns();
+            initDonationCategories();
+            generatePrayerTable();
+            updateStats();
+            
+            // Listen for real-time updates
+            bc.onmessage = (event) => {
+                if (event.data.type === 'DATA_UPDATE') {
+                    appData = event.data.data;
+                    updateAllDisplays();
+                    showToast('Real-time update received!', 'success');
+                }
+            };
+        });
+
+        // ==================== DATA SYNC ====================
+        function saveData() {
+            localStorage.setItem('aqsha_masjid_data', JSON.stringify(appData));
+            bc.postMessage({ type: 'DATA_UPDATE', data: appData });
+        }
+
+        function updateAllDisplays() {
+            initPrayerTimes();
+            initEvents();
+            initCampaigns();
+            updateStats();
+            if (currentAdmin) initAdminDashboard();
+            if (currentUser) updateUserDashboard();
+        }
+
+        function updateStats() {
+            const totalDonations = appData.donations.reduce((sum, d) => sum + d.amount, 0);
+            const todayDonations = appData.donations
+                .filter(d => new Date(d.date).toDateString() === new Date().toDateString())
+                .reduce((sum, d) => sum + d.amount, 0);
+            
+            document.getElementById('statDonations').textContent = `₹${totalDonations.toLocaleString('en-IN')}`;
+            document.getElementById('statVisitors').textContent = appData.visitorCount;
+            
+            if (currentAdmin) {
+                document.getElementById('dashTotalUsers').textContent = appData.users.length;
+                document.getElementById('dashTodayDonations').textContent = `₹${todayDonations.toLocaleString('en-IN')}`;
+                document.getElementById('dashActiveEvents').textContent = appData.events.length;
+                document.getElementById('dashLiveViewers').textContent = appData.isLive ? Math.floor(Math.random() * 30 + 20) : 0;
+            }
+        }
+
+        // ==================== NAVIGATION ====================
+        function showSection(sectionId) {
+            document.querySelectorAll('main > section').forEach(s => s.style.display = 'none');
+            const target = document.getElementById(sectionId);
+            if (target) {
+                target.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // ==================== PRAYER TIMES ====================
+        function initPrayerTimes() {
+            const pt = appData.prayerTimes;
+            const prayers = [
+                { name: 'Fajr', time: pt.fajr, icon: 'fa-sun' },
+                { name: 'Zuhr', time: pt.zuhr, icon: 'fa-sun' },
+                { name: 'Asr', time: pt.asr, icon: 'fa-cloud-sun' },
+                { name: 'Maghrib', time: pt.maghrib, icon: 'fa-moon' },
+                { name: 'Isha', time: pt.isha, icon: 'fa-star' }
+            ];
+
+            const grid = document.getElementById('prayerTimesGrid');
+            grid.innerHTML = '';
+            prayers.forEach(prayer => {
+                const div = document.createElement('div');
+                div.className = 'prayer-item';
+                div.id = `prayer-${prayer.name.toLowerCase()}`;
+                div.innerHTML = `<div class="prayer-name"><i class="fas ${prayer.icon}"></i> ${prayer.name}</div><div class="prayer-time">${prayer.time}</div>`;
+                grid.appendChild(div);
+            });
+
+            document.getElementById('jummahTimeDisplay').textContent = formatTime12(pt.jummah);
+            document.getElementById('jummahPrayerDisplay').textContent = formatTime12(addMinutes(pt.jummah, 15));
+
+            document.getElementById('editFajr').value = pt.fajr;
+            document.getElementById('editZuhr').value = pt.zuhr;
+            document.getElementById('editAsr').value = pt.asr;
+            document.getElementById('editMaghrib').value = pt.maghrib;
+            document.getElementById('editIsha').value = pt.isha;
+            document.getElementById('editJummah').value = pt.jummah;
+            
+            highlightCurrentPrayer();
+        }
+
+        function generatePrayerTable() {
+            const tbody = document.getElementById('prayerTableBody');
+            tbody.innerHTML = '';
+            for (let i = 13; i <= 28; i++) {
+                const row = document.createElement('tr');
+                const isToday = i === 13;
+                if (isToday) row.style.background = 'rgba(212,175,55,0.1)';
+                row.innerHTML = `<td><strong>${i} Feb</strong>${isToday ? ' <span style="color: var(--gold);">(Today)</span>' : ''}</td><td>${appData.prayerTimes.fajr}</td><td>${addMinutes(appData.prayerTimes.fajr, 75)}</td><td>${appData.prayerTimes.zuhr}</td><td>${appData.prayerTimes.asr}</td><td>${appData.prayerTimes.maghrib}</td><td>${appData.prayerTimes.isha}</td>`;
+                tbody.appendChild(row);
+            }
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const prayers = [
+                { name: 'Fajr', time: appData.prayerTimes.fajr },
+                { name: 'Zuhr', time: appData.prayerTimes.zuhr },
+                { name: 'Asr', time: appData.prayerTimes.asr },
+                { name: 'Maghrib', time: appData.prayerTimes.maghrib },
+                { name: 'Isha', time: appData.prayerTimes.isha }
+            ];
+
+            let nextPrayer = null;
+            let minDiff = Infinity;
+
+            prayers.forEach(prayer => {
+                const prayerTime = new Date();
+                const [h, m] = prayer.time.split(':').map(Number);
+                prayerTime.setHours(h, m, 0);
+                if (prayerTime > now) {
+                    const diff = prayerTime - now;
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        nextPrayer = prayer;
+                    }
+                }
+            });
+
+            if (!nextPrayer) {
+                nextPrayer = prayers[0];
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                const [h, m] = nextPrayer.time.split(':').map(Number);
+                tomorrow.setHours(h, m, 0);
+                minDiff = tomorrow - now;
+            }
+
+            const hours = Math.floor(minDiff / (1000 * 60 * 60));
+            const minutes = Math.floor((minDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((minDiff % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            document.getElementById('nextPrayerName').textContent = `Time remaining for ${nextPrayer.name}`;
+            highlightCurrentPrayer();
+        }
+
+        function highlightCurrentPrayer() {
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+            document.querySelectorAll('.prayer-item').forEach(item => item.classList.remove('active'));
+            
+            const prayers = [
+                { name: 'fajr', time: timeToMinutes(appData.prayerTimes.fajr) },
+                { name: 'zuhr', time: timeToMinutes(appData.prayerTimes.zuhr) },
+                { name: 'asr', time: timeToMinutes(appData.prayerTimes.asr) },
+                { name: 'maghrib', time: timeToMinutes(appData.prayerTimes.maghrib) },
+                { name: 'isha', time: timeToMinutes(appData.prayerTimes.isha) }
+            ];
+            
+            let current = null;
+            for (let i = 0; i < prayers.length; i++) {
+                const next = i < prayers.length - 1 ? prayers[i + 1].time : prayers[0].time + 24 * 60;
+                if (currentTime >= prayers[i].time && currentTime < next) {
+                    current = prayers[i].name;
+                    break;
+                }
+            }
+            if (current) {
+                const el = document.getElementById(`prayer-${current}`);
+                if (el) el.classList.add('active');
+            }
+        }
+
+        function timeToMinutes(time) {
+            const [h, m] = time.split(':').map(Number);
+            return h * 60 + m;
+        }
+
+        function addMinutes(time, mins) {
+            const [h, m] = time.split(':').map(Number);
+            const date = new Date();
+            date.setHours(h, m + mins);
+            return date.toTimeString().slice(0, 5);
+        }
+
+        function formatTime12(time24) {
+            const [h, m] = time24.split(':').map(Number);
+            const period = h >= 12 ? 'PM' : 'AM';
+            const h12 = h % 12 || 12;
+            return `${h12}:${String(m).padStart(2, '0')} ${period}`;
+        }
+
+        async function fetchPrayerTimesAPI() {
+            showToast('Fetching prayer times...', 'success');
+            try {
+                const response = await fetch('https://api.aladhan.com/v1/timings?latitude=26.8467&longitude=80.9462&method=1');
+                const data = await response.json();
+                if (data.code === 200) {
+                    const t = data.data.timings;
+                    appData.prayerTimes = { fajr: t.Fajr, zuhr: t.Dhuhr, asr: t.Asr, maghrib: t.Maghrib, isha: t.Isha, jummah: '12:15' };
+                    saveData();
+                    initPrayerTimes();
+                    generatePrayerTable();
+                    showToast('Prayer times updated!', 'success');
+                }
+            } catch (e) {
+                showToast('Using manual times', 'error');
+            }
+        }
+
+        function savePrayerTimesManual() {
+            appData.prayerTimes = {
+                fajr: document.getElementById('editFajr').value,
+                zuhr: document.getElementById('editZuhr').value,
+                asr: document.getElementById('editAsr').value,
+                maghrib: document.getElementById('editMaghrib').value,
+                isha: document.getElementById('editIsha').value,
+                jummah: document.getElementById('editJummah').value
+            };
+            saveData();
+            showToast('Prayer times updated & broadcasted!', 'success');
+        }
+
+        // ==================== DONATIONS ====================
+        function initCampaigns() {
+            const container = document.getElementById('campaignsContainer');
+            container.innerHTML = '';
+            appData.campaigns.forEach(campaign => {
+                const percent = Math.min(100, Math.round((campaign.raised / campaign.goal) * 100));
+                const div = document.createElement('div');
+                div.className = 'campaign-card';
+                div.innerHTML = `<div class="campaign-header"><span class="campaign-name">${campaign.name}</span><span style="color: var(--gold); font-weight: 700;">${percent}%</span></div><div class="progress-bar"><div class="progress-fill" style="width: ${percent}%"></div></div><div style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.85rem; color: #666;"><span>Raised: ₹${campaign.raised.toLocaleString('en-IN')}</span><span>Goal: ₹${campaign.goal.toLocaleString('en-IN')}</span></div>`;
+                container.appendChild(div);
+            });
+        }
+
+        function initDonationCategories() {
+            const container = document.getElementById('donationCategories');
+            const categories = [
+                { id: 'zakat', name: 'Zakat', icon: 'fa-hand-holding-usd', desc: '2.5% of savings' },
+                { id: 'sadaqah', name: 'Sadaqah', icon: 'fa-heart', desc: 'Voluntary charity' },
+                { id: 'masjid', name: 'Masjid Fund', icon: 'fa-mosque', desc: 'Maintenance' },
+                { id: 'education', name: 'Education', icon: 'fa-graduation-cap', desc: 'Madrasa' },
+                { id: 'fitra', name: 'Fitrana', icon: 'fa-utensils', desc: 'Before Eid' }
+            ];
+            container.innerHTML = '';
+            categories.forEach(cat => {
+                const card = document.createElement('div');
+                card.className = 'donation-card';
+                card.onclick = () => selectDonationCategory(card, cat.id);
+                card.innerHTML = `<div class="donation-icon"><i class="fas ${cat.icon}"></i></div><h4 style="font-size: 0.95rem;">${cat.name}</h4><p style="font-size: 0.8rem; color: #666;">${cat.desc}</p>`;
+                container.appendChild(card);
+            });
+        }
+
+        function selectDonationCategory(card, category) {
+            document.querySelectorAll('.donation-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            selectedCategory = category;
+        }
+
+        function selectAmount(amount) {
+            selectedAmountValue = amount;
+            document.getElementById('customAmount').value = '';
+            updateTotal();
+        }
+
+        function updateTotal() {
+            const custom = document.getElementById('customAmount').value;
+            const amount = custom || selectedAmountValue;
+            document.getElementById('subtotal').textContent = `₹${parseInt(amount || 0).toLocaleString('en-IN')}`;
+            document.getElementById('totalAmount').textContent = `₹${parseInt(amount || 0).toLocaleString('en-IN')}`;
+        }
+
+        function calculateZakat() {
+            const gold = parseFloat(document.getElementById('goldValue').value) || 0;
+            const silver = parseFloat(document.getElementById('silverValue').value) || 0;
+            const cash = parseFloat(document.getElementById('cashValue').value) || 0;
+            const business = parseFloat(document.getElementById('businessValue').value) || 0;
+            const total = gold + silver + cash + business;
+            const zakat = total > 0 ? total * 0.025 : 0;
+            document.getElementById('zakatTotal').textContent = `₹${zakat.toLocaleString('en-IN', {maximumFractionDigits: 2})}`;
+        }
+
+        function donateZakat() {
+            const amount = document.getElementById('zakatTotal').textContent.replace(/[₹,]/g, '');
+            if (parseFloat(amount) > 0) {
+                selectDonationCategory(document.querySelectorAll('.donation-card')[0], 'zakat');
+                document.getElementById('customAmount').value = amount;
+                updateTotal();
+            }
+        }
+
+        // ==================== RAZORPAY INTEGRATION ====================
+        function processDonation() {
+            const amount = parseInt(document.getElementById('totalAmount').textContent.replace(/[₹,]/g, ''));
+            const name = document.getElementById('donorName').value;
+            const email = document.getElementById('donorEmail').value;
+            const phone = document.getElementById('donorPhone').value;
+            
+            if (!amount || amount <= 0) { showToast('Please select an amount', 'error'); return; }
+            if (!selectedCategory) { showToast('Please select a category', 'error'); return; }
+            if (!name || !email || !phone) { showToast('Please fill all required fields', 'error'); return; }
+
+            // Use admin-configured Razorpay key or default test key
+            const razorpayKey = appData.razorpayKeyId || 'rzp_test_xxxxxxxxxxxx';
+            
+            const options = {
+                key: razorpayKey,
+                amount: amount * 100,
+                currency: 'INR',
+                name: 'Aqsha Masjid',
+                description: `${selectedCategory.toUpperCase()} Donation`,
+                image: 'https://i.imgur.com/your-logo.png', // Add your logo URL
+                handler: function(response) {
+                    // Save donation
+                    const donation = {
+                        id: 'DON-' + Date.now(),
+                        name, email, phone,
+                        category: selectedCategory,
+                        amount: amount,
+                        paymentId: response.razorpay_payment_id,
+                        date: new Date().toISOString(),
+                        status: 'completed'
+                    };
+                    
+                    appData.donations.push(donation);
+                    
+                    // Update campaign
+                    const campaign = appData.campaigns.find(c => c.id === 1);
+                    if (campaign) campaign.raised += amount;
+                    
+                    saveData();
+                    showToast('Payment successful! Thank you for your donation.', 'success');
+                    
+                    // Reset form
+                    selectedCategory = null;
+                    selectedAmountValue = 0;
+                    document.querySelectorAll('.donation-card').forEach(c => c.classList.remove('selected'));
+                    document.getElementById('donorName').value = '';
+                    document.getElementById('donorEmail').value = '';
+                    document.getElementById('donorPhone').value = '';
+                    document.getElementById('donorPAN').value = '';
+                    document.getElementById('customAmount').value = '';
+                    updateTotal();
+                    initCampaigns();
+                    updateStats();
+                },
+                prefill: { name, email, contact: phone },
+                theme: { color: '#1e5631' },
+                modal: {
+                    ondismiss: function() {
+                        showToast('Payment cancelled', 'error');
+                    }
+                }
+            };
+            
+            try {
+                const rzp = new Razorpay(options);
+                rzp.open();
+            } catch (e) {
+                showToast('Razorpay Error: ' + e.message, 'error');
+                console.error('Razorpay Error:', e);
+            }
+        }
+
+        // ==================== EVENTS ====================
+        function initEvents() {
+            const grid = document.getElementById('eventsGrid');
+            grid.innerHTML = '';
+            appData.events.forEach(event => {
+                const date = new Date(event.date);
+                const seatsLeft = event.seats - event.registered;
+                const isLow = seatsLeft < 20;
+                const card = document.createElement('div');
+                card.className = 'event-card';
+                card.innerHTML = `<div class="event-image"><div class="event-date"><span style="font-size: 1.25rem; display: block;">${date.getDate()}</span><span style="font-size: 0.7rem;">${date.toLocaleString('default', {month: 'short'})}</span></div><i class="fas fa-calendar-day"></i></div><div style="padding: 1.25rem;"><span class="seats-left ${isLow ? 'low' : ''}">${seatsLeft} seats left</span><h3 style="color: var(--primary-green); margin: 0.5rem 0; font-size: 1.1rem;">${event.title}</h3><div style="color: #666; font-size: 0.85rem; margin-bottom: 0.5rem;"><i class="fas fa-clock"></i> ${event.time} | <i class="fas fa-map-marker-alt"></i> ${event.location}</div><p style="color: #666; margin-bottom: 1rem; font-size: 0.9rem;">${event.description}</p><button class="btn btn-primary btn-sm" style="width: 100%;" onclick="registerForEvent(${event.id})">Register Now</button></div>`;
+                grid.appendChild(card);
+            });
+        }
+
+        function registerForEvent(eventId) {
+            if (!currentUser) { showToast('Please login to register', 'error'); openUserLoginModal(); return; }
+            const event = appData.events.find(e => e.id === eventId);
+            if (event && event.registered < event.seats) {
+                event.registered++;
+                if (!currentUser.events) currentUser.events = [];
+                currentUser.events.push(eventId);
+                const userIndex = appData.users.findIndex(u => u.email === currentUser.email);
+                if (userIndex !== -1) appData.users[userIndex] = currentUser;
+                localStorage.setItem('current_user', JSON.stringify(currentUser));
+                saveData();
+                showToast('Registered successfully!', 'success');
+                initEvents();
+            } else {
+                showToast('Event is full!', 'error');
+            }
+        }
+
+        // ==================== LIVE STREAM ====================
+       function toggleLiveStream() {
+    const toggle = document.getElementById('liveToggle');
+    appData.isLive = !appData.isLive;
+    
+    if (appData.isLive) {
+        toggle.classList.add('active');
+        document.getElementById('streamStatusText').textContent = 'LIVE';
+        document.getElementById('streamStatusText').style.color = '#4caf50';
+        
+        if (appData.youtubeUrl) {
+            enableLiveStream(appData.youtubeUrl);
+        }
+    } else {
+        toggle.classList.remove('active');
+        document.getElementById('streamStatusText').textContent = 'OFF';
+        document.getElementById('streamStatusText').style.color = '#666';
+        disableLiveStream();
+    }
+    saveData();
+}
+
+     function saveStreamSettings() {
+    appData.youtubeUrl = document.getElementById('youtubeUrl').value;
+    saveData();
+    showToast('Stream settings saved!', 'success');
+    
+    if (appData.isLive && appData.youtubeUrl) {
+        enableLiveStream(appData.youtubeUrl);
+    }
+}
+// ==================== LIVE STREAM FUNCTIONS ====================
+
+function checkLiveStatus() {
+    if (appData.isLive && appData.youtubeUrl) {
+        enableLiveStream(appData.youtubeUrl);
+    }
+}
+
+function enableLiveStream(url) {
+    const container = document.getElementById('liveContainer');
+    const placeholder = document.getElementById('streamPlaceholder');
+    const player = document.getElementById('youtubePlayer');
+    const badge = document.getElementById('liveBadge');
+    const viewerCount = document.getElementById('viewerCount');
+    
+    container.classList.add('live-active');
+    placeholder.style.display = 'none';
+    player.style.display = 'block';
+    badge.style.display = 'flex';
+    viewerCount.style.display = 'block';
+    
+    let videoId = '';
+    if (url.includes('embed/')) {
+        videoId = url.split('embed/')[1].split('?')[0];
+    } else if (url.includes('youtu.be/')) {
+        videoId = url.split('youtu.be/')[1].split('?')[0];
+    } else if (url.includes('watch?v=')) {
+        videoId = url.split('watch?v=')[1].split('&')[0];
+    }
+    
+    if (videoId) {
+        player.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" frameborder="0" allowfullscreen></iframe>`;
+    }
+    
+    setInterval(() => {
+        if (appData.isLive) {
+            document.getElementById('viewerNumber').textContent = Math.floor(Math.random() * 30 + 20);
+        }
+    }, 5000);
+}
+
+function disableLiveStream() {
+    document.getElementById('streamPlaceholder').style.display = 'block';
+    document.getElementById('youtubePlayer').style.display = 'none';
+    document.getElementById('liveBadge').style.display = 'none';
+    document.getElementById('viewerCount').style.display = 'none';
+    document.getElementById('youtubePlayer').innerHTML = '';
+}
+
+        // ==================== EDUCATION ====================
+        function initBooks() {
+            const grid = document.getElementById('bookGrid');
+            grid.innerHTML = '';
+            appData.books.forEach(book => {
+                const card = document.createElement('div');
+                card.className = 'book-card';
+                card.dataset.category = book.category;
+                card.innerHTML = `<div class="book-cover"><div style="position: absolute; top: 0.75rem; right: 0.75rem; background: var(--gold); color: var(--dark); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700;">${book.format}</div><i class="fas fa-book" style="opacity: 0.3; font-size: 4rem;"></i></div><div style="padding: 1rem;"><div style="font-weight: 700; color: var(--primary-green); margin-bottom: 0.25rem; font-size: 0.95rem;">${book.title}</div><div style="color: #666; font-size: 0.85rem;">${book.author}</div><div style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.75rem; color: #888;"><span><i class="fas fa-download"></i> ${book.downloads.toLocaleString()}</span></div><div style="display: flex; gap: 0.5rem; margin-top: 0.75rem;"><button class="btn btn-primary btn-sm" style="flex: 1;" onclick="window.open('${book.url}', '_blank')"><i class="fas fa-eye"></i> Read</button><button class="btn btn-outline btn-sm" onclick="window.open('${book.url}', '_blank')"><i class="fas fa-download"></i></button></div></div>`;
+                grid.appendChild(card);
+            });
+        }
+
+        function searchBooks() {
+            const query = document.getElementById('bookSearch').value.toLowerCase();
+            document.querySelectorAll('.book-card').forEach(card => {
+                const title = card.querySelector('div div').textContent.toLowerCase();
+                card.style.display = title.includes(query) ? 'block' : 'none';
+            });
+        }
+
+        function filterBooks(category) {
+            document.querySelectorAll('.book-card').forEach(card => {
+                card.style.display = (category === 'all' || card.dataset.category === category) ? 'block' : 'none';
+            });
+        }
+
+        function switchEduTab(tab) {
+            document.querySelectorAll('.edu-content').forEach(c => c.style.display = 'none');
+            document.getElementById('edu' + tab.charAt(0).toUpperCase() + tab.slice(1)).style.display = 'block';
+        }
+
+        // ==================== GALLERY ====================
+        function initGallery() {
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = '';
+            for (let i = 1; i <= 8; i++) {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.dataset.category = ['eid', 'jummah', 'events'][i % 3];
+                item.onclick = () => window.open(`https://picsum.photos/800/600?random=${i}`, '_blank');
+                item.innerHTML = `<img src="https://picsum.photos/400/400?random=${i}" alt="Gallery" loading="lazy"><div class="gallery-overlay"><h4 style="font-size: 0.95rem;">Event ${i}</h4><p style="font-size: 0.8rem;"><i class="fas fa-calendar"></i> 2026</p></div>`;
+                grid.appendChild(item);
+            }
+        }
+
+        function filterGallery(category) {
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.style.display = (category === 'all' || item.dataset.category === category) ? 'block' : 'none';
+            });
+        }
+
+        // ==================== AUTHENTICATION ====================
+        function openUserLoginModal() { document.getElementById('userLoginModal').classList.add('active'); }
+        function openAdminLoginModal() { document.getElementById('adminLoginModal').classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+        function handleUserLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            let user = appData.users.find(u => u.email === email);
+            if (!user) {
+                user = { id: Date.now(), name: email.split('@')[0], email, password, joined: new Date().toISOString(), donations: [], events: [], library: [] };
+                appData.users.push(user);
+                saveData();
+                showToast('Account created!', 'success');
+            } else if (user.password !== password) {
+                showToast('Invalid password', 'error');
+                return;
+            }
+            currentUser = user;
+            localStorage.setItem('current_user', JSON.stringify(user));
+            updateUserUI();
+            closeModal('userLoginModal');
+            showToast(`Welcome, ${user.name}!`, 'success');
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            if (username === 'admin' && password === 'admin123') {
+                currentAdmin = true;
+                document.getElementById('adminPanel').classList.add('active');
+                closeModal('adminLoginModal');
+                showToast('Welcome Admin!', 'success');
+                initAdminDashboard();
+                // Load Razorpay settings into form
+                document.getElementById('razorpayKeyId').value = appData.razorpayKeyId || 'rzp_test_xxxxxxxxxxxx';
+                document.getElementById('razorpayKeySecret').value = appData.razorpayKeySecret || '';
+            } else {
+                showToast('Invalid credentials', 'error');
+            }
+        }
+
+        function updateUserUI() {
+            document.getElementById('userLoginBtn').style.display = 'none';
+            document.getElementById('userPanelBtn').style.display = 'flex';
+        }
+
+        function openUserPanel() {
+            if (!currentUser) return;
+            document.getElementById('userPanel').classList.add('active');
+            document.getElementById('userNameDisplay').textContent = currentUser.name;
+            updateUserDashboard();
+        }
+
+        function closeUserPanel() { document.getElementById('userPanel').classList.remove('active'); }
+
+        function logoutUser() {
+            currentUser = null;
+            localStorage.removeItem('current_user');
+            document.getElementById('userLoginBtn').style.display = 'flex';
+            document.getElementById('userPanelBtn').style.display = 'none';
+            closeUserPanel();
+            showToast('Logged out', 'success');
+        }
+
+        function updateUserDashboard() {
+            if (!currentUser) return;
+            const userDonations = appData.donations.filter(d => d.email === currentUser.email);
+            const totalDonated = userDonations.reduce((sum, d) => sum + d.amount, 0);
+            document.getElementById('userTotalDonations').textContent = `₹${totalDonated.toLocaleString('en-IN')}`;
+            document.getElementById('userProfileName').value = currentUser.name;
+            document.getElementById('userProfileEmail').value = currentUser.email;
+            document.getElementById('userProfilePhone').value = currentUser.phone || '';
+            
+            const eventsList = document.getElementById('userEventsList');
+            if (currentUser.events && currentUser.events.length > 0) {
+                eventsList.innerHTML = currentUser.events.map(eventId => {
+                    const event = appData.events.find(e => e.id === eventId);
+                    return event ? `<div style="padding: 0.5rem; background: var(--cream); border-radius: 6px; margin-bottom: 0.5rem;"><strong>${event.title}</strong><p style="font-size: 0.8rem; color: #666;">${event.date}</p></div>` : '';
+                }).join('');
+            }
+            
+            const historyTable = document.getElementById('userDonationHistory');
+            if (userDonations.length > 0) {
+                historyTable.innerHTML = userDonations.map(d => `<tr><td>${new Date(d.date).toLocaleDateString()}</td><td>${d.category}</td><td>₹${d.amount.toLocaleString('en-IN')}</td></tr>`).join('');
+            }
+        }
+
+        function updateUserProfile(e) {
+            e.preventDefault();
+            if (!currentUser) return;
+            currentUser.name = document.getElementById('userProfileName').value;
+            currentUser.phone = document.getElementById('userProfilePhone').value;
+            localStorage.setItem('current_user', JSON.stringify(currentUser));
+            const userIndex = appData.users.findIndex(u => u.email === currentUser.email);
+            if (userIndex !== -1) appData.users[userIndex] = currentUser;
+            saveData();
+            showToast('Profile updated!', 'success');
+            document.getElementById('userNameDisplay').textContent = currentUser.name;
+        }
+
+        // ==================== ADMIN PANEL ====================
+        function toggleAdminSidebar() {
+            document.getElementById('adminSidebar').classList.toggle('active');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
+        }
+
+        function showAdminSection(sectionId, element) {
+            document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+            const target = document.getElementById(sectionId);
+            if (target) target.classList.add('active');
+            if (element) {
+                document.querySelectorAll('.admin-nav a').forEach(a => a.classList.remove('active'));
+                element.classList.add('active');
+            }
+            if (window.innerWidth <= 768) toggleAdminSidebar();
+        }
+
+        function initAdminDashboard() {
+            updateStats();
+            
+            const tbody = document.getElementById('donationsTableBody');
+            if (appData.donations.length > 0) {
+                tbody.innerHTML = appData.donations.slice(-10).reverse().map(d => `<tr><td>${d.id.slice(-6)}</td><td>${d.name}</td><td>${d.category}</td><td>₹${d.amount.toLocaleString('en-IN')}</td><td>${new Date(d.date).toLocaleDateString()}</td><td><span class="status-badge status-active">Completed</span></td></tr>`).join('');
+            }
+            
+            const usersBody = document.getElementById('usersTableBody');
+            if (appData.users.length > 0) {
+                usersBody.innerHTML = appData.users.map(u => `<tr><td>${u.name}</td><td>${u.email}</td><td>${new Date(u.joined).toLocaleDateString()}</td><td><button class="btn btn-sm btn-outline" style="padding: 0.25rem 0.5rem;"><i class="fas fa-edit"></i></button></td></tr>`).join('');
+            }
+            
+            const eventsList = document.getElementById('adminEventsList');
+            eventsList.innerHTML = appData.events.map(e => `<div style="padding: 1rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;"><div><strong>${e.title}</strong><p style="font-size: 0.85rem; color: #666;">${e.date} | ${e.registered}/${e.seats} registered</p></div><button class="btn btn-sm btn-outline" onclick="editEvent(${e.id})"><i class="fas fa-edit"></i></button></div>`).join('');
+            
+            const hadithList = document.getElementById('hadithScheduleList');
+            hadithList.innerHTML = appData.hadiths.map(h => `<div style="padding: 1rem; background: var(--cream); border-radius: 8px; margin-bottom: 0.5rem;"><div style="display: flex; justify-content: space-between; align-items: center;"><span style="font-weight: 600; color: var(--primary-green); text-transform: capitalize;">${h.schedule} Prayer</span><button class="btn btn-sm btn-outline">Edit</button></div><p style="font-size: 0.9rem; margin-top: 0.5rem; font-style: italic;">"${h.text}"</p></div>`).join('');
+        }
+
+        // ==================== RAZORPAY SETTINGS ====================
+        function saveRazorpaySettings() {
+            appData.razorpayKeyId = document.getElementById('razorpayKeyId').value;
+            appData.razorpayKeySecret = document.getElementById('razorpayKeySecret').value;
+            saveData();
+            showToast('Razorpay settings saved!', 'success');
+        }
+
+        function saveGeneralSettings() {
+            showToast('General settings saved!', 'success');
+        }
+
+        function logoutAdmin() {
+            currentAdmin = false;
+            document.getElementById('adminPanel').classList.remove('active');
+            showToast('Logged out', 'success');
+        }
+
+        function broadcastMessage() {
+            const msg = prompt('Enter message to broadcast:');
+            if (msg) showToast('Message broadcasted!', 'success');
+        }
+
+        function exportDonations() { showToast('Exporting to Excel...', 'success'); }
+        function openAddEventModal() { const title = prompt('Event Title:'); if (title) showToast('Event added!', 'success'); }
+        function editEvent(id) { showToast('Editing event ' + id, 'success'); }
+
+        // ==================== UTILITIES ====================
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}" style="color: ${type === 'success' ? '#4caf50' : '#f44336'};"></i><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function submitContactForm(e) { e.preventDefault(); showToast('Message sent!', 'success'); e.target.reset(); }
+        function subscribeNewsletter(e) { e.preventDefault(); showToast('Subscribed!', 'success'); e.target.reset(); }
+        function shareHadith(platform) { const text = document.getElementById('hadithText').textContent; if (platform === 'whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(text)}`); else window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`); }
+        function downloadSchedule() { showToast('Downloading PDF...', 'success'); }
+        function printSchedule() { window.print(); }
+
+        // Close modals on outside click
+        window.onclick = function(e) {
+            if (e.target.classList.contains('modal')) e.target.classList.remove('active');
+        }
+    </script>
+</body>
+</html>
